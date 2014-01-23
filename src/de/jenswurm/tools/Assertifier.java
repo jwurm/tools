@@ -1,3 +1,4 @@
+package de.jenswurm.tools;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,15 +18,21 @@ public class Assertifier {
 
     private static boolean includeIds = false;
 
-    private static boolean isRelevantGetter(Method method) {
-        String name = method.getName();
-        return name.startsWith("get") && method.getParameterTypes().length == 0 && !name.equals("getClass")
-                && !name.equals("getCacheKeyAttributes") && !name.equals("getProperties")
-                && !name.equals("getConstraints") && !name.equals("getDataTypeConstraints")
-                && !name.equals("getPropertyType") && !name.equals("get_AssociationHandler")
-                && !name.equals("getCacheKey") && !name.equals("get_InstanceId") && !name.equals("getDataTypeId")
-                && !name.equals("getInternalDate") && !name.equals("getAnspInhaltAsBoolean")
-                && !name.equals("getTechVersion") && (!name.equals("getId") || includeIds);
+	private static boolean isRelevantGetter(Method method) {
+		String name = method.getName();
+		return name.startsWith("get") && method.getParameterTypes().length == 0
+				&& !name.equals("getClass")
+				&& !name.equals("getCacheKeyAttributes")
+				&& !name.equals("getProperties")
+				&& !name.equals("getConstraints")
+				&& !name.equals("getDataTypeConstraints")
+				&& !name.equals("getPropertyType")
+				&& !name.equals("get_AssociationHandler")
+				&& !name.equals("getCacheKey")
+				&& !name.equals("get_InstanceId")
+				&& !name.equals("getDataTypeId")
+				&& !name.equals("getInternalDate")
+				&& (!name.equals("getId") || includeIds);
     }
 
     private boolean includeNull = false;
