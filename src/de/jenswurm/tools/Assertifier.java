@@ -139,6 +139,14 @@ public class Assertifier {
         }
         return "((" + result.getClass().getSimpleName() + ")" + path + "." + method.getName() + "())";
     }
+    
+    private String buildPathWithToString(Method method, Object result, String path) {
+        if (method == null) {
+            return path;
+        }
+        return path + "." + method.getName() + "().toString()";
+    }
+
 
     private StringBuilder processNull(String path) {
         return buildNull(path);
@@ -191,7 +199,7 @@ public class Assertifier {
         } else if (result instanceof Boolean) {
             ret.append(processResult((Boolean) result, buildPathPrimitive(currMethod, result, path)));
         } else if (result instanceof Date) {
-            // nothing
+        	ret.append(processResult(((Date)result).toString(), buildPathWithToString(currMethod, result, path)));
         } else {
             ret.append(traverse(result, buildPathWithCast(currMethod, result, path)));
         }
